@@ -21,6 +21,10 @@ const styles = {
 };
 
 export default class GridListExampleSimple extends React.Component {
+  goPub = id => {
+    alert(id);
+  }
+
   render() {
     return (
       <div style={styles.root}>
@@ -30,12 +34,12 @@ export default class GridListExampleSimple extends React.Component {
         >
           {this.props.tilesData.map((tile) => (
             <GridTile
-              key={tile.imgProduto}
-              title={tile.nomeProduto}
+              key={tile._id}
+              title={tile.nome}
               style={styles.gridTile}
+              onClick={() => this.goPub(tile._id)}
             >
-              <img src={require('../home/produto.png')} alt="error"/>
-              {/*<img src={'http://localhost:8080/produtos/images/' + tile.imgProduto} alt="error"/>*/}
+              <img src={'http://localhost:8080/produtos/images/' + tile.img} alt="error"/>
             </GridTile>
           ))}
         </GridList>

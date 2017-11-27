@@ -36,8 +36,13 @@ class App extends Component {
   };
 
   logOff = () => {
+    const setState = () => {
+      this.setState({ user: {} })
+    };
     this.props.history.push('/');
-    this.setState({ user: {} });
+    firebase.auth().signOut()
+    .then(setState())
+    .catch(error => console.log(error));
   };
 
   bindObserver = f => {
@@ -45,7 +50,15 @@ class App extends Component {
   };
 
   componentWillMount() {
+    const setUser = this.setUser;
     firebase.initializeApp(config.firebase);
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
   }
 
   componentDidMount() {

@@ -67,13 +67,11 @@ export default class LoginDialog extends React.Component {
           <TextField
             floatingLabelText="Usuario"
             id="user"
-            defaultValue="admin@tecbid.com.br"
           /><br />
           <TextField
             floatingLabelText="Senha"
             type="password"
             id="password"
-            defaultValue="a12345"
           /><br />
         </center>
       </Dialog>

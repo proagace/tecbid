@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Header from './header';
 import Home from './home';
+import Footer from './footer';
 import Cadastro from './cadastro';
 import Profile from './profile';
 import * as firebase from 'firebase';
@@ -84,11 +85,7 @@ class App extends Component {
       	<Switch>
       		<Route exact path="/" render={() => <Home history={this.props.history} subscribe={this.bindObserver}/>} />
           <Route path="/profile" render={() => <Profile history={this.props.history} user={this.state.user}/>} />
-<<<<<<< HEAD
           <Route path="/cadastro" component={Cadastro} />
-=======
-          <Route path="/cadastro" render={() => <Profile />} />
->>>>>>> ce5592addd7279f3f1ad45f68bb23e16dbdec574
         </Switch>
         <Footer />
       </div>

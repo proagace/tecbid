@@ -29,32 +29,49 @@ class LeilaoTimer extends React.Component {
   }
 
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
+    if (this.state.time > 0) {
+      this.timerID = setInterval(
+        () => this.tick(),
+        1000
+      );
+    }
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID);
+    if(this.timerID) {
+      clearInterval(this.timerID);
+    }
   }
 
   tick = () => {
+    if(this.state.time - 1000 <= 0) {
+      clearInterval(this.timerID);
+    }
     this.setState({
       time: this.state.time - 1000
     });
-  }
+  };
+
+  convertToReadable = (time) => {
+    let x = time / 1000;
+    let seconds = parseInt(x % 60, 10);
+    x /= 60;
+    let minutes = parseInt(x % 60, 10);
+    x /= 60;
+    let hours = parseInt(x % 24, 10);
+    x /= 24;
+    let days = parseInt(x, 10);
+    return days + " Dias " + hours + ":" + minutes + ":" + seconds;
+  };
 
   render() {
     return (
       <div style={{fontSize: '30px', marginTop: '10px'}}>
-        {new Date(this.state.time).getDate()}
-        {" Dias "}
-        {new Date(this.state.time).getHours()}
-        {":"}
-        {new Date(this.state.time).getMinutes()}
-        {":"}
-        {new Date(this.state.time).getSeconds()}
+        { this.state.time <= 0 ? <div>Leilão Terminado!</div> :
+          <div>
+            {this.convertToReadable(this.state.time)}
+          </div>
+        }
       </div>
     );
   }

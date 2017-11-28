@@ -6,34 +6,8 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const items = [
-  <MenuItem value={1} primaryText="AC" />,
-  <MenuItem value={2} primaryText="AL" />,
-  <MenuItem value={3} primaryText="AM" />,
-  <MenuItem value={4} primaryText="AP" />,
-  <MenuItem value={5} primaryText="AB" />,
-  <MenuItem value={6} primaryText="CE" />,
-  <MenuItem value={7} primaryText="DF" />,
-  <MenuItem value={8} primaryText="ES" />,
-  <MenuItem value={9} primaryText="GO" />,
-  <MenuItem value={10} primaryText="MA" />,
-  <MenuItem value={11} primaryText="MG" />,
-  <MenuItem value={12} primaryText="MS" />,
-  <MenuItem value={13} primaryText="MT" />,
-  <MenuItem value={14} primaryText="PA" />,
-  <MenuItem value={15} primaryText="PB" />,
-  <MenuItem value={16} primaryText="PI" />,
-  <MenuItem value={17} primaryText="PR" />,
-  <MenuItem value={18} primaryText="RJ" />,
-  <MenuItem value={19} primaryText="RN" />,
-  <MenuItem value={20} primaryText="RS" />,
-  <MenuItem value={21} primaryText="RO" />,
-  <MenuItem value={22} primaryText="SC" />,
-  <MenuItem value={23} primaryText="SE" />,
-  <MenuItem value={24} primaryText="SP" />,
-  <MenuItem value={25} primaryText="TO" />,
-
-];  
+const items = ["AC","AL","AM","AP","AB","CE","DF","ES","GO","MA",
+"MG","MS","MT","PA","PB","PI","PR","RJ","RN","RS","RO","SC","SE","SP","TO"];
 
 const styles = {
   bgHeader: {backgroundColor: '#E6E7E8', padding: '30px 0 30px 0'},
@@ -48,7 +22,7 @@ const styles = {
   underlineStyle: {borderColor: '#8B2F31'},
   dados : {marginLeft:"10%"},
   textMargin:{marginLeft: "15px"},
-  customWidth: { width: 100, marginLeft: "15px" },
+  customWidth: { width: 100, marginLeft: "15px"},
 }
 
 class Header extends Component{
@@ -74,7 +48,7 @@ class Fisica extends Component{
             <span style={styles.conteudoPaper} >Tipo de Conta</span>
             <Divider />
             <Paper style={styles.paper}>
-              <img style={{"width": "50%", "margin-left": "40px"}}  src={require('../images/user.png')} alt="error" />
+              <img style={{width: "50%", marginLeft: "40px"}}  src={require('../images/user.png')} alt="error" />
             </Paper>
             <div style={styles.paper}>
               <h3>Física</h3>
@@ -95,7 +69,7 @@ class Juridica extends Component{
             <span style={styles.conteudoPaper} >Tipo de Conta</span>
             <Divider />
             <Paper style={styles.paper}>
-              <img style={{"width": "50%", "margin-left": "40px"}}  src={require('../images/user.png')} alt="error" />
+              <img style={{width: "50%", marginLeft: "40px"}}  src={require('../images/user.png')} alt="error" />
             </Paper>
             <div style={styles.paper}>
               <h3>Jurídica</h3>
@@ -408,9 +382,8 @@ class Localizacao extends Component{
             floatingLabelStyle={styles.floatingLabelStyle}
             value={this.state.estado}
             onChange={this.handleEstadoChange}
-
           >
-            {items}
+            {items.map(op => (<MenuItem key={op} value={op} primaryText={op} />))}
           </SelectField> <br />
           <TextField
             floatingLabelText="CIDADE"
@@ -578,50 +551,49 @@ class Localizacao extends Component{
   }
 
   render() {
-   console.log('render');
     return (
       <div style={ this.state.mobileMode ? this.styles.mobile : this.styles.normal }>
         <Header />
-        <div style={{"padding-top": "60px"}}>
+        <div style={{paddingTop: "60px", margin: '0 auto', width: '50%'}}>
           <div style={styles.root}>
-            <div style={{"margin-left":"25%"}} >
+            <div style={{marginRight: '25px'}} >
               {this.state.fisica ? <Fisica /> : <Juridica />}
               <RaisedButton 
                 label="Trocar"
-                backgroundColor={'#585570'}
-                labelColor={'white'}
+                backgroundColor='#585570'
+                labelColor='#ffffff'
                 onClick={this.changeInnerPage}
-                style={{"margin-left":"25%"}} 
+                style={{marginLeft:"25%"}} 
 
               />
             </div>  
             <div >
                   <div>
                     <h3>Dados Necessários</h3>
-                    <p>{this.getStepContent(this.state.stepIndex)}</p>
+                    {this.getStepContent(this.state.stepIndex)}
                     <div style={{marginTop: 12}}>
                       <RaisedButton
                         label="Voltar"
                         disabled={this.state.stepIndex === 0}
                         onClick={this.handlePrev.bind(this)}
                         style={{marginRight: 12}}
-                        backgroundColor={'#8B2F31'}
-                        labelColor={'white'}
+                        backgroundColor='#8B2F31'
+                        labelColor='#ffffff'
                       />
 
                       {this.state.stepIndex === 1 ?                       
                       <RaisedButton
-                        label={'Cadastrar'}
-                        backgroundColor={'#8B2F31'}
+                        label='Cadastrar'
+                        backgroundColor='#8B2F31'
                         onClick={this.state.fisica ? this.storeFisica : this.storeJuridica }
-                        labelColor={'white'}
+                        labelColor='#ffffff'
                       /> 
                       :
                         <RaisedButton
-                        label={'Avançar'}
-                        backgroundColor={'#8B2F31'}
+                        label='Avançar'
+                        backgroundColor='#8B2F31'
                         onClick={this.handleNext.bind(this)}
-                        labelColor={'white'}
+                        labelColor='#ffffff'
                       /> 
 
                     }

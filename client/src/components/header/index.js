@@ -23,7 +23,7 @@ class Logged extends Component {
     return (
       <IconMenu
         iconButtonElement={
-          <IconButton><MoreVertIcon color='white'/></IconButton>
+          <IconButton><MoreVertIcon color='#ffffff'/></IconButton>
         }
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}

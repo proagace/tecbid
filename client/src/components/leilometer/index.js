@@ -12,7 +12,24 @@ const styles = {
 export default class Leilometer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: 67};
+    this.state = {value: 0};
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.animate(),
+      50
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  animate = () => {
+    if (this.state.value < this.props.value) {
+      this.setState({value: this.state.value + 1})
+    }
   }
 
   render() {

@@ -34,6 +34,10 @@ server.get('/produtos/:id', function(req, res) {
   mongoExecute(findById, {_id: req.params.id}, 'produtos', response => res.json(response));
 });
 
+server.post('/users', (req, res) => {
+  mongoExecute(insert, [req.body], 'users', response => res.send({success: true}));
+});
+
 server.post('/produtos/images', upload.single('avatar'), (req, res) => {
   if(!req.file) {
     console.log("No file received");

@@ -1,23 +1,26 @@
 use tecbid;
-db.produtos.insertMany(
+db.produtos.insertMany([
 {
-  "_id" : ObjectId("59fe96514674e52dfe0da995"),
   "nome" : "Micro-ondas Philips",
-  "time" : "03:47:50 GMT-0200 (BRST)",
+  "startDate" : new Date().toLocaleString(),
+  "finalDate" : new Date("12/15/2017, 7:50:29 PM").toLocaleString(),
+  "desc" : "descrição teste desnecessariamente grande",
   "img" : "9e64d98e3af8f723ac88f6a4825dd067"
 },
 {
-  "_id" : ObjectId("59fe9dfa4674e52dfe0da996"),
   "nome" : "Micro-ondas c/botão mute",
-  "time" : "03:49:10 GMT-0200 (BRST)",
+  "startDate" : new Date().toLocaleString(),
+  "finalDate" : new Date("12/15/2017, 7:50:29 PM").toLocaleString(),
+  "desc" : "descrição teste desnecessariamente grande",
   "img" : "9e502f861d4c2f40442d5e8a9dca47d6"
 },
 {
-  "_id" : ObjectId("59fea8234674e52dfe0da997"),
   "nome" : "No break do Aparecido",
-  "time" : "03:56:51 GMT-0200 (BRST)",
+  "startDate" : new Date().toLocaleString(),
+  "finalDate" : new Date("12/15/2017, 7:50:29 PM").toLocaleString(),
+  "desc" : "descrição teste desnecessariamente grande",
   "img" : "9e502f861d4c2f40442d5e8a9sido123"
-});
+}]);
 
 db.users.insertOne(
 {

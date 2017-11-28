@@ -228,7 +228,7 @@ class Profile extends Component {
           <Notificacoes /> : 
           <div>
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
-              <Leilometer />
+              <Leilometer value={45}/>
               <div style={styles.dadosUsuario}>
                 {this.state.comprador ? <Comprador user={this.props.user}/> : <Leiloeiro user={this.props.user}/>}
               </div>

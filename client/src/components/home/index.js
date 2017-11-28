@@ -9,15 +9,15 @@ import ActionSearch from 'material-ui/svg-icons/action/search';
 import {fullWhite} from 'material-ui/styles/colors';
 
 const items = [
-  <MenuItem value={1} primaryText="Automotivo" />,
-  <MenuItem value={2} primaryText="Beleza e Saúde" />,
-  <MenuItem value={5} primaryText="Decoraçao" />,
-  <MenuItem value={5} primaryText="Informática" />,
-  <MenuItem value={5} primaryText="Eletrodomésticos" />,
-  <MenuItem value={5} primaryText="Celulares e Telefonia" />,
-  <MenuItem value={5} primaryText="Eletrônicos" />,
-  <MenuItem value={5} primaryText="Esportes e Lazer" />,
-  <MenuItem value={5} primaryText="Outros" />,
+  <MenuItem key={1} value={1} primaryText="Automotivo" />,
+  <MenuItem key={2} value={2} primaryText="Beleza e Saúde" />,
+  <MenuItem key={3} value={5} primaryText="Decoraçao" />,
+  <MenuItem key={4} value={5} primaryText="Informática" />,
+  <MenuItem key={5} value={5} primaryText="Eletrodomésticos" />,
+  <MenuItem key={6} value={5} primaryText="Celulares e Telefonia" />,
+  <MenuItem key={7} value={5} primaryText="Eletrônicos" />,
+  <MenuItem key={8} value={5} primaryText="Esportes e Lazer" />,
+  <MenuItem key={9} value={5} primaryText="Outros" />,
 ];  
 
 const styles = {
@@ -55,9 +55,9 @@ class Tutorial extends Component{
     return(
       <div>
         <center>
-          <h1 style={{"color":"#872429", "padding-top":"20px"}}>Como funciona o leilão TecBid</h1>
+          <h1 style={{color:"#872429", paddingTop:"20px"}}>Como funciona o leilão TecBid</h1>
           <div style={styles.root}> 
-              <div style={{"margin-left":"10%"}}>
+              <div style={{marginLeft:"10%"}}>
                 <img style={styles.imageCad} src={require('../images/cadastrese.png')} alt="error"  />
                 <p style={styles.title}>CADASTRE-SE</p>
                 <span style={styles.subtitle}>garanta sua participação</span> <br />
@@ -74,7 +74,7 @@ class Tutorial extends Component{
                 <p style={styles.title}>LEVANTE A MÃO</p>
                 <p style={styles.subtitle}>quantas vezes quiser</p>                
               </div>
-              <div style={{"margin-right":"10%"}} >
+              <div style={{marginRight:"10%"}} >
                 <img style={styles.image} src={require('../images/aguarde.png')} alt="error" />
                 <p style={styles.title}>AGUARDE A DATA FINAL</p>
                 <p style={styles.subtitle}>e ganhe!</p>                

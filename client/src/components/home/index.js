@@ -37,7 +37,7 @@ const styles = {
   },
   subtitle:{fontSize: '100%'},
   menu:{backgroundColor: '#872429'},
-  btnMenu:{color: 'white'},
+  btnMenu:{color: '#ffffff'},
   floatingLabelStyle:{color: 'black', fontSize: '150%'},
   searchMenu:{marginLeft: '25%',marginRight: '25%'},
   search: {float: 'right'},

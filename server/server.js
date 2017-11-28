@@ -3,6 +3,40 @@ var multer		= require('multer');
 var express 	= require('express');
 var bodyParser 	= require('body-parser');
 
+let trackProdutos = {};
+
+let updateTrackProdutos = () => {
+  mongoExecute(list, null, 'produtos', response => {if (response) trackProdutos = response;});
+};
+
+updateTrackProdutos();
+
+//Atualiza o status dos produtos
+let timer = setInterval(
+  () => {
+    trackProdutos.forEach(prod => {
+      if (prod.status === 'ativo' && (new Date(prod.finalDate).getTime() <= new Date().getTime())) {
+        mongoExecute(update, [{_id: prod._id },{ status: 'inativo' }], 'produtos', response => {
+          if(response) {
+            prod.status = 'inativo';
+          } else {
+            console.log("error trying to update poduct status");
+          }
+        });
+      } else if (prod.status === 'criado' && (new Date(prod.startDate).getTime() <= new Date().getTime())) {
+        mongoExecute(update, [{_id: prod._id },{ status: 'ativo' }], 'produtos', response => {
+          if(response) {
+            prod.status = 'ativo';
+          } else {
+            console.log("error trying to update poduct status");
+          }
+        });
+      }
+    }); 
+  },
+  1000
+);
+
 const upload = multer({ dest: './images/' });
 
 const server = express();
@@ -19,7 +53,8 @@ server.get('/users/:email', function(req, res) {
 });
 
 server.get('/produtos', function(req, res) {
-  mongoExecute(list, null, 'produtos', response => res.json(response));
+  //mongoExecute(list, null, 'produtos', response => res.json(response));
+  res.json(trackProdutos);
 });
 
 server.get('/produtos/images/:id', (req, res) => {
@@ -31,7 +66,8 @@ server.get('/images/:id', (req, res) => {
 });
 
 server.get('/produtos/:id', function(req, res) {
-  mongoExecute(findById, {_id: req.params.id}, 'produtos', response => res.json(response));
+  //mongoExecute(findById, {_id: req.params.id}, 'produtos', response => res.json(response));
+  res.json(trackProdutos.find(prod => (prod._id === req.params.id)));
 });
 
 server.post('/produtos/images', upload.single('avatar'), (req, res) => {

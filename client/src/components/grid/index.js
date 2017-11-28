@@ -24,7 +24,7 @@ class LeilaoTimer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      time: new Date(props.finalDate).getTime() - new Date().getTime() 
+      time: new Date(props.finalDate).getTime() - new Date().getTime()
     };
   }
 
@@ -61,16 +61,22 @@ class LeilaoTimer extends React.Component {
     let hours = parseInt(x % 24, 10);
     x /= 24;
     let days = parseInt(x, 10);
-    return days + " Dias " + hours + ":" + minutes + ":" + seconds;
+    return days.toLocaleString('pt-BR', {minimumIntegerDigits: 2, useGrouping:false}) + " Dias " 
+        + hours.toLocaleString('pt-BR', {minimumIntegerDigits: 2, useGrouping:false}) + ":" 
+        + minutes.toLocaleString('pt-BR', {minimumIntegerDigits: 2, useGrouping:false}) + ":"
+        + seconds.toLocaleString('pt-BR', {minimumIntegerDigits: 2, useGrouping:false});
   };
 
   render() {
     return (
       <div style={{fontSize: '30px', marginTop: '10px'}}>
         { this.state.time <= 0 ? <div>Leilão Terminado!</div> :
-          <div>
-            {this.convertToReadable(this.state.time)}
-          </div>
+          (new Date(this.props.startDate).getTime() > new Date().getTime() ? 
+            <div>Começa em: <br />{new Date(this.props.startDate).toLocaleString('pt-BR')}</div> : 
+            <div>
+              {this.convertToReadable(this.state.time)}
+            </div>
+          )
         }
       </div>
     );
@@ -103,11 +109,11 @@ class GridListProdutos extends React.Component {
               cols={1}
               rows={1}
               titleBackground="rgba(0, 0, 0, 0)"
-              titleStyle={{color: 'black', textAlign: 'center', height: '137px'}}
+              titleStyle={{color: 'black', textAlign: 'center', height: '190px'}}
               style={styles.gridTile}
               onClick={() => this.goPub(tile._id)}
             >
-              <div style={{width: '200px', height: '200px', margin: '0 auto'}}>
+              <div style={{width: '177px', height: '177px', margin: '0 auto'}}>
                 <img src={'http://localhost:8080/produtos/images/' + tile.img} alt="error"/>
               </div>
             </GridTile>

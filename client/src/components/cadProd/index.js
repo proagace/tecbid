@@ -5,7 +5,6 @@ import {
   StepLabel,
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
@@ -22,8 +21,7 @@ class CadProd extends Component {
     const myState = this.state;
     if (stepIndex < 2) {
       this.setState({
-        stepIndex: stepIndex + 1,
-        finished: stepIndex >= 2,
+        stepIndex: stepIndex + 1
       });
       return;
     }
@@ -54,7 +52,7 @@ class CadProd extends Component {
           qtdLances: 0
         })
       })
-      .then(console.log('ok'))
+      .then(this.setState({finished: true}))
       .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
@@ -85,11 +83,10 @@ class CadProd extends Component {
               /> 
             </div>
             <div style={{marginLeft: '25px'}}>
-              <img style={{width: '100px', height: '100px'}} ref="show" alt="test"/>
-              <input type="file" label="Choose file" accept="image/*" ref="img" onChange={() => {
+              <img style={{width: '100px', height: '100px'}} ref="show" src={this.state.img} alt=""/>
+              <input type="file" accept="image/*" ref="img" style={{marginLeft: '15px'}} onChange={() => {
                 if(this.refs.img.files.length > 0) {
-                  this.refs.show.src = URL.createObjectURL(this.refs.img.files[0])
-                  this.setState({img: this.refs.img.files[0]});
+                  this.setState({img: URL.createObjectURL(this.refs.img.files[0])});
                 }
               }}/>
               <TextField
@@ -180,16 +177,19 @@ class CadProd extends Component {
           ) : (
             <div>
               <div>{this.getStepContent(stepIndex)}</div>
-              <div style={{marginTop: 12}}>
-                <FlatButton
+              <div style={{marginTop: 12, width: '188px', marginLeft: 'auto'}}>
+                <RaisedButton
+                  backgroundColor='#872429'
+                  labelColor="#ffffff"
                   label="Back"
                   disabled={stepIndex === 0}
                   onClick={this.handlePrev}
                   style={{marginRight: 12}}
                 />
                 <RaisedButton
+                  backgroundColor='#872429'
+                  labelColor="#ffffff"
                   label={stepIndex === 2 ? 'Finish' : 'Next'}
-                  primary={true}
                   onClick={this.handleNext}
                 />
               </div>

@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Header from './header';
 import Home from './home';
+import Edit from './editProfile';
 import Footer from './footer';
 import Cadastro from './cadastro';
 import Publicacao from './publicacao';
@@ -90,7 +91,6 @@ class App extends Component {
           <Route path="/cadastro" component={Cadastro} />
           <Route path="/cadprod" component={CadProd} />
           <Route path="/publicacao/:id" component={Publicacao} />
-
         </Switch>
         <Footer />
       </div>

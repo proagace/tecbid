@@ -102,7 +102,7 @@ class GridListProdutos extends React.Component {
               title={
                 <div>
                   <div style={{fontSize: '20px'}}>{tile.nome}</div>
-                  <div style={{fontSize: '15px'}}>{tile.desc}</div>
+                  <div style={{fontSize: '15px'}}>{tile.carac}</div>
                   <LeilaoTimer startDate={tile.startDate} finalDate={tile.finalDate}/>
                 </div>
               }

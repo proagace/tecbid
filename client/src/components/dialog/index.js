@@ -15,6 +15,12 @@ export default class LoginDialog extends React.Component {
     };
   }
 
+
+  handleRegister = () => {
+    this.props.history.push('/cadastro');
+  };  
+
+
   handleOpen = () => {
     this.setState({open: true});
   };
@@ -43,15 +49,17 @@ export default class LoginDialog extends React.Component {
   render() {
     const actions = [
       <FlatButton
-        label="Cancelar"
-        primary={true}
-        onClick={this.handleClose}
-      />,
-      <FlatButton
         label="Entrar"
         primary={true}
         onClick={this.handleSubmit}
       />,
+      <FlatButton label="CADASTRAR" primary={true} onClick={ () => {this.handleRegister(); this.handleClose()}} />,
+      <FlatButton
+        label="Cancelar"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+
     ];
 
     return (

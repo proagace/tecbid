@@ -85,8 +85,8 @@ class LeilaoTimer extends React.Component {
 
 class GridListProdutos extends React.Component {
   goPub = id => {
-    alert(id);
-  }
+    this.props.history.push('/publicacao/' + id);
+  };
 
   render() {
     return (

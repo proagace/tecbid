@@ -78,7 +78,7 @@ server.get('/images/:id', (req, res) => {
 
 server.get('/produtos/:id', function(req, res) {
   //mongoExecute(findById, {_id: req.params.id}, 'produtos', response => res.json(response));
-  res.json(trackProdutos.find(prod => (prod._id === req.params.id)));
+  res.json(trackProdutos.find(prod => (prod._id == req.params.id)));
 });
 
 server.post('/users', (req, res) => {
@@ -100,6 +100,13 @@ server.post('/produtos/images', function (req, res) {
     } else {
       res.send(res.req.file.filename);  
     }
+  });
+});
+
+server.post('/produtos/:id', function(req, res) {
+  mongoExecute(updateById, [{_id: req.params.id}, req.body], 'produtos', response => {
+    res.json(response);
+    updateTrackProdutos();
   });
 });
 

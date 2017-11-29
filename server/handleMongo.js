@@ -53,6 +53,15 @@ update = (db, obj, col, callback) => {
   });
 };
 
+updateById = (db, obj, col, callback) => {
+  let collection = db.collection(col);
+  collection.updateOne({_id: new ObjectId(obj[0]._id)}, { $set: obj[1] },(err, result) => {
+    assert.equal(null, err);
+    assert.equal(1, result.result.n);
+    callback(result);
+  });
+};
+
 insert = (db, obj, col, callback) => {
   // Get the documents collection
   var collection = db.collection(col);

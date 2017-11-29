@@ -213,7 +213,7 @@ class Home extends Component {
       <div style={ this.state.mobileMode ? this.styles.mobile : this.styles.normal }>
         <Tutorial />
         <MainMenu changeVMode={this.changeViewMode}/>
-        {this.state.produtos ? <Grid tilesData={this.handleFilter()}/> : null}
+        {this.state.produtos ? <Grid history={this.props.history} tilesData={this.handleFilter()}/> : null}
       </div>
     );
   }

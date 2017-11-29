@@ -6,6 +6,7 @@ import Home from './home';
 import Edit from './editProfile';
 import Footer from './footer';
 import Cadastro from './cadastro';
+import Publicacao from './publicacao';
 import Profile from './profile';
 import CadProd from './cadProd';
 import * as firebase from 'firebase';
@@ -75,7 +76,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginTop: '64px'}}>
         <Header 
           history={this.props.history}
           firebase={firebase} 
@@ -88,7 +89,8 @@ class App extends Component {
       		<Route exact path="/" render={() => <Home history={this.props.history} subscribe={this.bindObserver}/>} />
           <Route path="/profile" render={() => <Profile history={this.props.history} user={this.state.user}/>} />
           <Route path="/cadastro" component={Cadastro} />
-          <Route path="/edit" component={Edit} />
+          <Route path="/cadprod" component={CadProd} />
+          <Route path="/publicacao/:id" component={Publicacao} />
         </Switch>
         <Footer />
       </div>

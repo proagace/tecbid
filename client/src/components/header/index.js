@@ -29,7 +29,6 @@ class Logged extends Component {
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
       >
         <MenuItem primaryText="PERFIL" onClick={() => this.props.history.push('/profile')}/>
-        <MenuItem primaryText="CADASTRAR" onClick={() => this.props.history.push('/cadprod')}/>
         <MenuItem primaryText="SAIR" onClick={this.props.logOff}/>
       </IconMenu>
     );
@@ -45,6 +44,8 @@ class Header extends Component {
     this.openDialog = f;
   };
 
+
+
   render() {
     return (
       <div>
@@ -52,6 +53,7 @@ class Header extends Component {
           callback={this.bindDialog} 
           firebase={this.props.firebase} 
           setUser={this.props.setUser}
+          history={this.props.history}
         />
         <AppBar
           title={this.props.isLogged ? 'Olá ' + this.props.user.nome : ''}
@@ -60,6 +62,7 @@ class Header extends Component {
           iconElementLeft={<img src={require('./brand.png')} alt="Error retrieving file" style={{'cursor': 'pointer'}}/>}
           iconElementRight={!this.props.isLogged ? <FlatButton label="ENTRAR" onClick={() => this.openDialog()}/> : <Logged history={this.props.history} logOff={this.props.logOff}/>}
         />
+
       </div>
     );
   }

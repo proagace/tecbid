@@ -104,9 +104,7 @@ class DadosFisica extends Component{
   _handleNomeChange(event,value){ DadosFisica.nome=value; this.setState({nome: value});}
   _handleTelChange(event,value){ DadosFisica.tel=value; this.setState({tel: value});}
   _handleEmailChange(event,value){ DadosFisica.email=value; this.setState({email: value});}
-  _handlePwdChange(event,value){ DadosJuridica.pwd=value; this.setState({pwd: value});}
-
-
+  _handlePwdChange(event,value){ DadosFisica.pwd=value; this.setState({pwd: value});}
 
   render(){
     return(
@@ -335,6 +333,7 @@ class Localizacao extends Component{
   _handleCompChange(event,value){ Localizacao.comp=value; this.setState({comp: value});}
 
 
+
   render(){
     return(
       <div>
@@ -442,6 +441,23 @@ class Localizacao extends Component{
     };
   }
 
+
+    static user = '';
+    static pwd = '';
+    
+  
+
+  handleSubmit = () => {
+      
+      this.user= this.state.fisica ? DadosFisica.email : DadosJuridica.emailj;
+      this.pwd= this.state.fisica ? DadosFisica.pwd : DadosJuridica.pwdj;
+      this.props.firebase.auth().createUserWithEmailAndPassword(this.user, this.pwd)
+      .then(console.log('ok'))
+      .catch(err => {
+        alert(err.message);
+      });
+    } 
+
   storeFisica = (users) => {
     fetch('http://localhost:8080/users', {
       method: 'POST',
@@ -464,7 +480,10 @@ class Localizacao extends Component{
         complemento: Localizacao.comp,
       })
     })
-    .then(console.log('ok'))
+    .then(() => {
+      console.log('ok');
+      alert('Cadastrado com sucesso!');
+    })    
     .catch(err => console.log(err));
   };
 
@@ -491,12 +510,19 @@ class Localizacao extends Component{
         complemento: Localizacao.comp,
       })
     })
-    .then(console.log('ok'))
+    .then(() => {
+      console.log('ok');
+      alert('Cadastrado com sucesso!');
+    })  
     .catch(err => console.log(err));
   };  
 
   changeInnerPage = () => {
-    this.setState({fisica: !this.state.fisica});
+    this.setState({fisica: !this.state.fisica});    
+  };
+
+
+  clear = () => {
     DadosFisica.cpf='';
     DadosFisica.nome='';
     DadosFisica.tel='';
@@ -514,10 +540,13 @@ class Localizacao extends Component{
     Localizacao.estado='';
     Localizacao.cidade='';
     Localizacao.num='';
-    Localizacao.comp='';    
-  };
+    Localizacao.comp='';
+    this.setState({stepIndex: 0});
+  }
 
-  
+
+
+
   handleNext() {
     let stepIndex = this.state.stepIndex;
     this.setState({
@@ -550,6 +579,7 @@ class Localizacao extends Component{
     }
   }
 
+
   render() {
     return (
       <div style={ this.state.mobileMode ? this.styles.mobile : this.styles.normal }>
@@ -562,7 +592,10 @@ class Localizacao extends Component{
                 label="Trocar"
                 backgroundColor='#585570'
                 labelColor='#ffffff'
-                onClick={this.changeInnerPage}
+                onClick={ () => {
+                  this.changeInnerPage();
+                  this.clear();
+                  }}                
                 style={{marginLeft:"25%"}} 
 
               />
@@ -585,7 +618,11 @@ class Localizacao extends Component{
                       <RaisedButton
                         label='Cadastrar'
                         backgroundColor='#8B2F31'
-                        onClick={this.state.fisica ? this.storeFisica : this.storeJuridica }
+                        onClick={ () => {
+                          this.state.fisica ? this.storeFisica() : this.storeJuridica();
+                          this.handleSubmit();
+                          this.clear();
+                        }}
                         labelColor='#ffffff'
                       /> 
                       :

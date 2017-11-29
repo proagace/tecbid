@@ -87,7 +87,7 @@ class App extends Component {
       	<Switch>
       		<Route exact path="/" render={() => <Home history={this.props.history} subscribe={this.bindObserver}/>} />
           <Route path="/profile" render={() => <Profile history={this.props.history} user={this.state.user}/>} />
-          <Route path="/cadastro" component={Cadastro} />
+          <Route path="/cadastro" render={() => <Cadastro firebase={firebase} /> } />
           <Route path="/cadprod" component={CadProd} />
           <Route path="/publicacao/:id" component={Publicacao} />
 

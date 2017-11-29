@@ -114,7 +114,7 @@ class Comprador extends Component {
         E-MAIL: {this.props.user.email}<br />
         TELEFONE: {this.props.user.tel}<br />
         ENDEREÇO: {typeof this.props.user.endereco !== 'undefined' ? 
-        this.props.user.endereco.cidade + ', ' +this.props.user.endereco.estado : null}<br />
+        this.props.user.cidade + ', ' +this.props.user.estado : null}<br />
       </div>
     );
   }
@@ -125,12 +125,12 @@ class Leiloeiro extends Component {
     return (
       <div>
         <h1>DADOS DA EMPRESA</h1>
-        RAZÃO SOCIAL: {this.props.user.razaoSocial}<br />
+        RAZÃO SOCIAL: {this.props.user.razaosocial}<br />
         CNPJ: {this.props.user.cnpj}<br />
-        E-MAIL: {this.props.user.emailEmpresa}<br />
-        TELEFONE: {this.props.user.telEmpresa}<br />
-        ENDEREÇO: {typeof this.props.user.enderecoEmpresa !== 'undefined' ? 
-        this.props.user.enderecoEmpresa.cidade + ', ' +this.props.user.enderecoEmpresa.estado : null}<br />
+        E-MAIL: {this.props.user.email}<br />
+        TELEFONE: {this.props.user.tel}<br />
+        ENDEREÇO: {typeof this.props.user.endereco !== 'undefined' ? 
+        this.props.user.cidade + ', ' +this.props.user.estado : null}<br />
       </div>
     );
   }
@@ -154,8 +154,8 @@ class InfoBar extends Component {
             <td>
               <div style={styles.infoText}>
                 {this.props.user.pFisica ? 'PESSOA FÍSICA' : 'PESSOA JURÍDICA'}<br />
-                <div style={{fontWeight: 'bold', fontSize: '30px'}}>{this.props.user.nome}</div><br />
-                CPF:{' '}{this.props.user.cpf}<br />
+                <div style={{fontWeight: 'bold', fontSize: '30px'}}>{this.props.user.pFisica ? this.props.user.nome : this.props.user.razaosocial}</div><br />
+                CPF:{' '}{this.props.user.pFisica ? this.props.user.cpf : this.props.user.cnpj}<br />
               </div>
             </td>
             </tr>
@@ -230,7 +230,7 @@ class Profile extends Component {
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
               <Leilometer value={45}/>
               <div style={styles.dadosUsuario}>
-                {this.state.comprador ? <Comprador user={this.props.user}/> : <Leiloeiro user={this.props.user}/>}
+                {this.props.user.pFisica ? <Comprador user={this.props.user}/> : <Leiloeiro user={this.props.user}/>}
               </div>
             </div>
             <LeiloesTable />

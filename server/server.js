@@ -2,6 +2,7 @@ const mongoExecute = require('./handleMongo.js').mongoExecute;
 var multer		= require('multer');
 var express 	= require('express');
 var bodyParser 	= require('body-parser');
+const path = require('path');
 
 let trackProdutos = {};
 
@@ -37,7 +38,17 @@ let timer = setInterval(
   1000
 );
 
-const upload = multer({ dest: './images/' });
+//const upload = multer({ dest: './images/' });
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './images/');
+  },
+  filename: function (req, file, cb) {
+    var id = Math.random().toString(16) + Date.now() + path.extname(file.originalname);
+    cb(null, id);
+  }
+});
+var upload = multer({ storage: storage }).single('image');
 
 const server = express();
 server.use( bodyParser.json() );
@@ -74,16 +85,21 @@ server.post('/users', (req, res) => {
   mongoExecute(insert, [req.body], 'users', response => res.send({success: true}));
 });
 
-server.post('/produtos/images', upload.single('avatar'), (req, res) => {
-  if(!req.file) {
-    console.log("No file received");
-    return res.send({
-      success: false
-    });
-  }
-  console.log('File received');
-  return res.send({
-    success: true
+server.post('/produtos', (req, res) => {
+  mongoExecute(insert, [req.body], 'produtos', response => {
+    updateTrackProdutos();
+    res.send({success: true});
+  });
+});
+
+server.post('/produtos/images', function (req, res) {
+  upload(req, res, function (err) {
+    if (err){
+      console.log(JSON.stringify(err));
+      res.status(400).send('fail saving image');
+    } else {
+      res.send(res.req.file.filename);  
+    }
   });
 });
 

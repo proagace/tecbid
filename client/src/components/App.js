@@ -6,6 +6,7 @@ import Home from './home';
 import Footer from './footer';
 import Cadastro from './cadastro';
 import Profile from './profile';
+import CadProd from './cadProd';
 import * as firebase from 'firebase';
 import config from './config.json';
 import { withRouter } from 'react-router-dom';
@@ -86,6 +87,7 @@ class App extends Component {
       		<Route exact path="/" render={() => <Home history={this.props.history} subscribe={this.bindObserver}/>} />
           <Route path="/profile" render={() => <Profile history={this.props.history} user={this.state.user}/>} />
           <Route path="/cadastro" component={Cadastro} />
+          <Route path="/cadprod" component={CadProd} />
         </Switch>
         <Footer />
       </div>

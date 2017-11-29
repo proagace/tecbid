@@ -29,6 +29,7 @@ class App extends Component {
     }
   };
 
+
   setUser = (user) => {
     fetch('http://localhost:8080/users/' + user.email)
     .then(resp => {return resp.json();})

@@ -46,10 +46,12 @@ class CadProd extends Component {
           img: fileName,
           desc: myState.desc,
           vlrInicial: myState.vlrInicial,
+          vlrAtual: myState.vlrInicial,
           lanceMinimo: myState.lanceMinimo,
           startDate: myState.startDate.toDateString() + " " + myState.startTime.toTimeString(),
           finalDate: myState.finalDate.toDateString() + " " + myState.finalTime.toTimeString(),
-          status: 'criado'
+          status: 'criado',
+          qtdLances: 0
         })
       })
       .then(console.log('ok'))

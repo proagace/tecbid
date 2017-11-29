@@ -29,6 +29,7 @@ class Logged extends Component {
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
       >
         <MenuItem primaryText="PERFIL" onClick={() => this.props.history.push('/profile')}/>
+        <MenuItem primaryText="CADASTRAR" onClick={() => this.props.history.push('/cadprod')}/>
         <MenuItem primaryText="SAIR" onClick={this.props.logOff}/>
       </IconMenu>
     );

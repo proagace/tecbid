@@ -25,16 +25,16 @@ const styles = {
   infoBar: {backgroundColor: '#4B4B4D', height: '50px'},
   info: {marginLeft: '150px'},
   infoText: {padding: '0 0 0 50px'},
-  toggle: {color: 'white', marginLeft: '350px'},
+  toggle: {color: '#ffffff', marginLeft: '350px'},
   background: {background: 'linear-gradient(grey, white)', height: '200px'},
-  thumbOff: {backgroundColor: 'white', top: '9px', left: '7px'},
+  thumbOff: {backgroundColor: '#ffffff', top: '9px', left: '7px'},
   trackOff: {height: '25px', backgroundColor: '#4B4B4D', border: '3px solid white'},
-  thumbSwitched: {backgroundColor: 'white', top: '9px', left: '99%'},
+  thumbSwitched: {backgroundColor: '#ffffff', top: '9px', left: '99%'},
   trackSwitched: {backgroundColor: '#4B4B4D', height: '25px', border: '3px solid white'},
   button: {right: '42px', top: '246px', position: 'absolute'},
   dadosUsuario: {width: '50%', marginLeft: 'auto'},
   notification: {right: '190px', top: '241px', position: 'absolute'},
-  badge: {backgroundColor: '#872429', color: 'white', top: 12, right: 12}
+  badge: {backgroundColor: '#872429', color: '#ffffff', top: 12, right: 12}
 };
 
 class LeiloesTable extends Component {
@@ -212,7 +212,7 @@ class Profile extends Component {
             style={this.state.notificationMode ? {backgroundColor: 'slategrey'} : null} 
             tooltip="Notificações" onClick={this.toggleNotifications}
           >
-            <NotificationsIcon color='white'/>
+            <NotificationsIcon color='#ffffff'/>
           </IconButton>
         </Badge>
         <RaisedButton

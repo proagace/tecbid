@@ -24,37 +24,60 @@ class LeilaoTimer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      time: new Date(props.finalDate).getTime() - new Date().getTime() 
+      time: new Date(props.finalDate).getTime() - new Date().getTime()
     };
   }
 
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
+    if (this.state.time > 0) {
+      this.timerID = setInterval(
+        () => this.tick(),
+        1000
+      );
+    }
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID);
+    if(this.timerID) {
+      clearInterval(this.timerID);
+    }
   }
 
   tick = () => {
+    if(this.state.time - 1000 <= 0) {
+      clearInterval(this.timerID);
+    }
     this.setState({
       time: this.state.time - 1000
     });
-  }
+  };
+
+  convertToReadable = (time) => {
+    let x = time / 1000;
+    let seconds = parseInt(x % 60, 10);
+    x /= 60;
+    let minutes = parseInt(x % 60, 10);
+    x /= 60;
+    let hours = parseInt(x % 24, 10);
+    x /= 24;
+    let days = parseInt(x, 10);
+    return days.toLocaleString('pt-BR', {minimumIntegerDigits: 2, useGrouping:false}) + " Dias " 
+        + hours.toLocaleString('pt-BR', {minimumIntegerDigits: 2, useGrouping:false}) + ":" 
+        + minutes.toLocaleString('pt-BR', {minimumIntegerDigits: 2, useGrouping:false}) + ":"
+        + seconds.toLocaleString('pt-BR', {minimumIntegerDigits: 2, useGrouping:false});
+  };
 
   render() {
     return (
       <div style={{fontSize: '30px', marginTop: '10px'}}>
-        {new Date(this.state.time).getDate()}
-        {" Dias "}
-        {new Date(this.state.time).getHours()}
-        {":"}
-        {new Date(this.state.time).getMinutes()}
-        {":"}
-        {new Date(this.state.time).getSeconds()}
+        { this.state.time <= 0 ? <div>Leilão Terminado!</div> :
+          (new Date(this.props.startDate).getTime() > new Date().getTime() ? 
+            <div>Começa em: <br />{new Date(this.props.startDate).toLocaleString('pt-BR')}</div> : 
+            <div>
+              {this.convertToReadable(this.state.time)}
+            </div>
+          )
+        }
       </div>
     );
   }
@@ -86,11 +109,11 @@ class GridListProdutos extends React.Component {
               cols={1}
               rows={1}
               titleBackground="rgba(0, 0, 0, 0)"
-              titleStyle={{color: 'black', textAlign: 'center', height: '137px'}}
+              titleStyle={{color: 'black', textAlign: 'center', height: '190px'}}
               style={styles.gridTile}
               onClick={() => this.goPub(tile._id)}
             >
-              <div style={{width: '200px', height: '200px', margin: '0 auto'}}>
+              <div style={{width: '177px', height: '177px', margin: '0 auto'}}>
                 <img src={'http://localhost:8080/produtos/images/' + tile.img} alt="error"/>
               </div>
             </GridTile>

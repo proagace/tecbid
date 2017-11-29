@@ -2,24 +2,35 @@ use tecbid;
 db.produtos.insertMany([
 {
   "nome" : "Micro-ondas Philips",
-  "startDate" : new Date().toLocaleString(),
-  "finalDate" : new Date("12/15/2017, 7:50:29 PM").toLocaleString(),
+  "startDate" : new Date("11/27/2017, 7:50:29 PM").toLocaleString('pt-BR'),
+  "finalDate" : new Date("12/15/2017, 7:50:29 PM").toLocaleString('pt-BR'),
   "desc" : "descrição teste desnecessariamente grande",
-  "img" : "9e64d98e3af8f723ac88f6a4825dd067"
+  "img" : "9e64d98e3af8f723ac88f6a4825dd067",
+  "status": "ativo"
 },
 {
   "nome" : "Micro-ondas c/botão mute",
-  "startDate" : new Date().toLocaleString(),
-  "finalDate" : new Date("12/15/2017, 7:50:29 PM").toLocaleString(),
+  "startDate" : new Date("11/29/2017, 03:51:00 AM").toLocaleString('pt-BR'),
+  "finalDate" : new Date("11/30/2017, 03:51:00 AM").toLocaleString('pt-BR'),
   "desc" : "descrição teste desnecessariamente grande",
-  "img" : "9e502f861d4c2f40442d5e8a9dca47d6"
+  "img" : "9e502f861d4c2f40442d5e8a9dca47d6",
+  "status": "criado"
 },
 {
   "nome" : "No break do Aparecido",
-  "startDate" : new Date().toLocaleString(),
-  "finalDate" : new Date("12/15/2017, 7:50:29 PM").toLocaleString(),
+  "startDate" : new Date("11/27/2017, 7:50:29 PM").toLocaleString('pt-BR'),
+  "finalDate" : new Date("11/28/2017, 01:44:00 AM").toLocaleString('pt-BR'),
   "desc" : "descrição teste desnecessariamente grande",
-  "img" : "9e502f861d4c2f40442d5e8a9sido123"
+  "img" : "9e502f861d4c2f40442d5e8a9sido123",
+  "status": "ativo"
+},
+{
+  "nome" : "No break do Aparecido",
+  "startDate" : new Date("11/28/2017, 03:51:00 AM").toLocaleString('pt-BR'),
+  "finalDate" : new Date("11/29/2017, 03:51:00 AM").toLocaleString('pt-BR'),
+  "desc" : "descrição teste desnecessariamente grande",
+  "img" : "9e502f861d4c2f40442d5e8a9sido123",
+  "status": "criado"
 }]);
 
 db.users.insertOne(

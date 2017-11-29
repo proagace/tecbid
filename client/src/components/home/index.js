@@ -11,13 +11,13 @@ import {fullWhite} from 'material-ui/styles/colors';
 const items = [
   <MenuItem key={1} value={1} primaryText="Automotivo" />,
   <MenuItem key={2} value={2} primaryText="Beleza e Saúde" />,
-  <MenuItem key={3} value={5} primaryText="Decoraçao" />,
-  <MenuItem key={4} value={5} primaryText="Informática" />,
+  <MenuItem key={3} value={3} primaryText="Decoraçao" />,
+  <MenuItem key={4} value={4} primaryText="Informática" />,
   <MenuItem key={5} value={5} primaryText="Eletrodomésticos" />,
-  <MenuItem key={6} value={5} primaryText="Celulares e Telefonia" />,
-  <MenuItem key={7} value={5} primaryText="Eletrônicos" />,
-  <MenuItem key={8} value={5} primaryText="Esportes e Lazer" />,
-  <MenuItem key={9} value={5} primaryText="Outros" />,
+  <MenuItem key={6} value={6} primaryText="Celulares e Telefonia" />,
+  <MenuItem key={7} value={7} primaryText="Eletrônicos" />,
+  <MenuItem key={8} value={8} primaryText="Esportes e Lazer" />,
+  <MenuItem key={9} value={9} primaryText="Outros" />,
 ];  
 
 const styles = {
@@ -37,7 +37,7 @@ const styles = {
   },
   subtitle:{fontSize: '100%'},
   menu:{backgroundColor: '#872429'},
-  btnMenu:{color: 'white'},
+  btnMenu:{color: '#ffffff'},
   floatingLabelStyle:{color: 'black', fontSize: '150%'},
   searchMenu:{marginLeft: '25%',marginRight: '25%'},
   search: {float: 'right'},
@@ -133,9 +133,26 @@ class MainMenu extends Component{
 
         <div style={styles.menu}>
           <center>
-            <FlatButton style={styles.btnMenu} label="TOP LEILÕES" />
-            <FlatButton style={styles.btnMenu} label="FINALIZADOS" />
-            <FlatButton style={styles.btnMenu} label="PRÓXIMOS" />
+            <FlatButton 
+              style={styles.btnMenu} 
+              onClick={() => this.props.changeVMode('top')} 
+              label="TOP LEILÕES" 
+            />
+            <FlatButton 
+              style={styles.btnMenu} 
+              onClick={() => this.props.changeVMode('inativo')} 
+              label="FINALIZADOS" 
+            />
+            <FlatButton 
+              style={styles.btnMenu}
+              onClick={() => this.props.changeVMode('criado')}
+              label="PRÓXIMOS" 
+            />
+            <FlatButton 
+              style={styles.btnMenu}
+              onClick={() => this.props.changeVMode('ativo')}
+              label="ATIVOS" 
+            />
           </center>
         </div>
       </div>
@@ -150,6 +167,7 @@ class Home extends Component {
     this.state = {
       produtos: null,
       mobileMode: false,
+      viewMode: 'top',
     };
     this.styles = {
       normal: {marginTop: '64px'},
@@ -158,11 +176,25 @@ class Home extends Component {
   }
 
   handleProducts = (resp) => {
-    this.setState({produtos: (<Grid tilesData={resp}/>)});
+    this.setState({produtos: resp});
   };
 
   update = mobileMode => {
     this.setState({mobileMode: mobileMode});
+  };
+
+  changeViewMode = mode => {
+    this.setState({viewMode: mode});
+  };
+
+  handleFilter = () => {
+    let result;
+    if( this.state.viewMode !== 'top' ) {
+      result = this.state.produtos.filter(prod => (prod.status === this.state.viewMode));
+    } else {
+      result = this.state.produtos; //TODO: implementar logica para top leilões
+    }
+    return result;
   };
 
   componentWillMount() {
@@ -180,8 +212,8 @@ class Home extends Component {
     return(
       <div style={ this.state.mobileMode ? this.styles.mobile : this.styles.normal }>
         <Tutorial />
-        <MainMenu />
-        {this.state.produtos}
+        <MainMenu changeVMode={this.changeViewMode}/>
+        {this.state.produtos ? <Grid tilesData={this.handleFilter()}/> : null}
       </div>
     );
   }

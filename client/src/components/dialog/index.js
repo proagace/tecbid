@@ -19,6 +19,10 @@ export default class LoginDialog extends React.Component {
     this.setState({open: true});
   };
 
+  handleTouchTap = () => {
+    this.props.history.push('/cadastro');
+  };
+
   handleClose = () => {
     this.setState({open: false});
   };
@@ -52,6 +56,11 @@ export default class LoginDialog extends React.Component {
         primary={true}
         onClick={this.handleSubmit}
       />,
+      <FlatButton
+        label="Cadastrar"
+        primary={true}
+        onClick={ () => {this.handleTouchTap(); this.handleClose();}}
+      />,      
     ];
 
     return (

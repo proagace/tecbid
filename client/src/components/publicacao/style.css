@@ -1,0 +1,19 @@
+img {
+  width: 100%;
+  height: auto;
+}
+
+.situacaoProd{
+	font-size: 20px;
+	color: green;
+	margin-left: 20px;
+}
+
+.exampleNumber{
+	border-radius: 5px;
+}
+
+.situacaoLances{
+	font-size: 12px;
+	color: black;
+}

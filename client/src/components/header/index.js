@@ -51,7 +51,11 @@ class Header extends Component {
           callback={this.bindDialog} 
           firebase={this.props.firebase} 
           setUser={this.props.setUser}
+          history={this.props.history}
         />
+
+
+
         <AppBar
           title={this.props.isLogged ? 'Olá ' + this.props.user.nome : ''}
           style={styles.header}

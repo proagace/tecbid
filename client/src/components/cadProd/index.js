@@ -83,10 +83,11 @@ class CadProd extends Component {
               /> 
             </div>
             <div style={{marginLeft: '25px'}}>
-              <img style={{width: '100px', height: '100px'}} ref="show" src={this.state.img} alt=""/>
+              <img style={{width: '100px', height: '100px'}} ref="show" alt=""/>
               <input type="file" accept="image/*" ref="img" style={{marginLeft: '15px'}} onChange={() => {
                 if(this.refs.img.files.length > 0) {
-                  this.setState({img: URL.createObjectURL(this.refs.img.files[0])});
+                  this.setState({img: this.refs.img.files[0]});
+                  this.refs.show.src = URL.createObjectURL(this.refs.img.files[0]);
                 }
               }}/>
               <TextField
